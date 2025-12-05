@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proteção para as mulheres</title>
+    <style>
+        /* ===== RESET ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        /* ===== CORES DO TEMA ===== */
+        :root {
+            --rosa-queimado: #a30052;
+            --rosa-claro: #f4c2d2;
+            --creme: #fff7fa;
+            --vinho-suave: #7a2e45;
+            --cinza-rosa: #c8a8b4;
+            --texto: #333;
+            --branco: #fff;
+        }
+
+        /* ===== BODY ===== */
+        body {
+            background: linear-gradient(135deg, var(--rosa-claro), var(--creme));
+            transition: 0.5s;
+            color: var(--texto);
+            line-height: 1.6;
+        }
+
+        /* ===== MODO ESCURO ===== */
+        .dark body {
+            background: #2a1a21;
+            color: #fff;
+        }
+
+        .dark .page-wrapper {
+            background: #3a242d;
+            color: #fff;
+        }
+
+        .dark .card {
+            background: #4a2d38;
+            border-color: #7a2e45;
+        }
+
+        /* ===== BOTÃO MODO ESCURO ===== */
+        .darkmode-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--vinho-suave);
+            color: var(--branco);
+            border: none;
+            padding: 12px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            box-shadow: 0 0 10px #0004;
+            transition: 0.3s;
+        }
+
+        .darkmode-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* ===== BOTÃO VOLTAR AO TOPO ===== */
+        .top-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: var(--rosa-queimado);
+            color: var(--branco);
+            border: none;
+            padding: 14px 18px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 22px;
+            display: none;
+            box-shadow: 0 0 15px #0004;
+            transition: 0.3s;
+        }
+
+        .top-btn:hover {
+            background: var(--vinho-suave);
+            transform: scale(1.1);
+        }
+
+        /* ===== WRAPPER ===== */
+        .page-wrapper {
+            background: var(--branco);
+            width: 90%;
+            max-width: 1300px;
+            margin: 50px auto;
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+            transition: 0.5s;
+        }
+
+        /* ===== HEADER ===== */
+        header {
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.6rem;
+            color: var(--rosa-queimado);
+            margin-bottom: 15px;
+        }
+
+        /* ===== GRID / CONTAINER ===== */
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        /* ===== CARDS ===== */
+        .card {
+            background: var(--branco);
+            padding: 25px;
+            border-radius: 18px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+            border-top: 5px solid var(--rosa-queimado);
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .card h2,
+        .card h3 {
+            color: var(--rosa-queimado);
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: var(--texto);
+        }
+
+        /* ===== BOTÕES ===== */
+        .btn {
+            background: var(--rosa-queimado);
+            color: var(--branco);
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-align: center;
+            transition: 0.3s;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background: #79003a;
+            transform: scale(1.05);
+        }
+
+        /* ===== SEÇÃO “VOCÊ NÃO ESTÁ SOZINHA” ===== */
+        .apoio {
+            text-align: center;
+            padding: 50px 20px;
+            background: var(--rosa-claro);
+            border-radius: 20px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            margin: 50px 0;
+        }
+
+        .apoio h2 {
+            color: var(--rosa-queimado);
+            margin-bottom: 15px;
+        }
+
+        .apoio p {
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+        }
+
+        .apoio-btn {
+            background: var(--rosa-queimado);
+            color: var(--branco);
+            padding: 14px 30px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .apoio-btn:hover {
+            background: #79003a;
+            transform: scale(1.07);
+        }
+
+        /* ===== RESPONSIVO ===== */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .apoio {
+                padding: 40px 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- BOTÃO MODO ESCURO -->
+    <button class="darkmode-btn" onclick="document.body.classList.toggle('dark')">🌓</button>
+
+    <!-- BOTÃO VOLTAR AO TOPO -->
+    <button class="top-btn" onclick="window.scrollTo({ top: 0, behavior: 'smooth' });">⬆</button>
+
+    <!-- WRAPPER -->
+    <div class="page-wrapper">
+        <header>
+            <h1>Feminicídio</h1>
+
+            <h2>O que é feminicídio?</h2>
+            <p>Feminicídio é o assassinato de uma mulher pelo fato de ela ser mulher. Ou seja, é um crime motivado por violência de gênero.</p>
+
+            <h2>Por que há Feminicídio?</h2>
+            <p>Essa resposta está ligada à combinação de fatores históricos, culturais e sociais que tornam o machismo uma característica estrutural da sociedade brasileira. Somos um país patriarcal, que desvaloriza mulheres, as considera propriedades dos homens e normaliza todo tipo de violência cometida contra mulheres, especialmente no ambiente doméstico. Violência doméstica e feminicídio são motivados por questões de poder e controle, e pela misoginia que perpetua a ideia da supremacia dos homens.</p>
+            <p>A desigualdade de gênero normalizada autoriza socialmente a subjugação das mulheres, que são controladas. Quando ousam se posicionar e enfrentar as violências, recebem respostas agressivas por parte dos homens que muitas vezes culminam no feminicídio. Mas o feminicídio não está necessariamente ligado à reação das mulheres. Mesmo as que nunca se levantam contra seus agressores são assassinadas.</p>
+            <p>Ausência ou ineficácia de políticas públicas para enfrentar essa situação, desde o apoio às vítimas até a efetiva punição aos agressores, tornam o cenário ainda mais complexo.</p>
+
+            <h2>Tipos de feminicídio</h2>
+            <div class="container">
+                <div class="card">
+                    <h3>Íntimo e Familiar</h3>
+                    <p>Cometido pelo companheiro ou ex-companheiro da vítima, ou dentro do círculo familiar por parentes ou amigos próximos. Inclui o crime de honra em alguns países.</p>
+                </div>
+                <div class="card">
+                    <h3>Feminicídio Racial</h3>
+                    <p>Ocorre principalmente em guerras, quando mulheres de uma etnia ou grupo específico são alvo de violência, incluindo violência sexual por soldados.</p>
+                </div>
+                <div class="card">
+                    <h3>Feminicídio em Série</h3>
+                    <p>Quando um homem mata várias mulheres para obter prazer sexual, geralmente cometido por psicopatas com falta de empatia.</p>
+                </div>
+                <div class="card">
+                    <h3>Violência Física</h3>
+                    <p>Inclui espancamentos, estrangulamento, queimaduras, tortura e qualquer conduta que afete a integridade física da mulher.</p>
+                </div>
+                <div class="card">
+                    <h3>Violência Psicológica</h3>
+                    <p>Ameaças, constrangimento, humilhação, manipulação, isolamento, perseguição e insultos que afetam a autoestima.</p>
+                </div>
+                <div class="card">
+                    <h3>Violência Sexual</h3>
+                    <p>Forçar relações sexuais, impedir uso de contraceptivos, matrimônio forçado, gravidez não consentida.</p>
+                </div>
+                <div class="card">
+                    <h3>Violência Patrimonial</h3>
+                    <p>Controlar dinheiro, reter ou destruir bens, documentos, estelionato ou furto de objetos da mulher.</p>
+                </div>
+                <div class="card">
+                    <h3>Violência Moral</h3>
+                    <p>Calúnia, difamação ou injúria, como acusar a mulher de traição ou expor sua vida íntima.</p>
+                </div>
+            </div>
+
+            <h2>O processo que envolve a violência contra a mulher</h2>
+            <p><strong>Fase 1 – Tensão:</strong> Os primeiros sinais de abuso começam a surgir. A mulher tenta evitar conflitos e explicar o comportamento agressivo do parceiro.</p>
+            <p><strong>Fase 2 – Agressão:</strong> A violência se concretiza. O agressor distorce a realidade para manter o controle.</p>
+            <p><strong>Fase 3 – Arrependimento:</strong> O agressor pede desculpas e a vítima, fragilizada, acredita que ele pode mudar, permanecendo na relação.</p>
+
+            <h2>Feminicídio no Brasil</h2>
+            <p>O Brasil tem histórico de violência contra mulheres e é o 5º país que mais mata mulheres no mundo. A origem desta violência está ligada à colonização e à formação histórica do país.</p>
+
+            <h2>Dados de feminicídio no Brasil</h2>
+            <p>Em 2018 foram registrados 1.173 casos de feminicídio. As maiores taxas estão em Roraima e as menores em São Paulo. Denúncias pelo 180 têm aumentado anualmente, de 11.263 em 2018 para 17.836 em 2019.</p>
+
+            <h2>Leis contra o feminicídio</h2>
+            <p><strong>1983:</strong> Tentativa de feminicídio contra Maria da Penha.</p>
+            <p><strong>2001:</strong> Brasil condenado pela CIDH.</p>
+            <p><strong>2006:</strong> Lei Maria da Penha (Lei 11.340/06).</p>
+            <p><strong>2015:</strong> Lei do Feminicídio (Lei 13.104/15).</p>
+            <p><strong>2024:</strong> Lei 14.994, que amplia pena máxima de 30 para 40 anos.</p>
+
+            <h2>Lei Maria da Penha</h2>
+            <p>Maria da Penha Maia Fernandes se tornou símbolo da luta contra violência doméstica no Brasil, inspirando medidas de proteção e a criação de delegacias especializadas.</p>
+
+        </header>
+    </div>
+
+    <script>
+        // Mostrar botão voltar ao topo
+        const topBtn = document.querySelector('.top-btn');
+        window.addEventListener('scroll', () => {
+            topBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,405 @@
+/* ===========================
+   RESET BÁSICO
+=========================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ===========================
+   HEADER / NAVBAR
+=========================== */
+header.topo {
+    background: #a30052;
+    color: #fff;
+    padding: 15px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.navbar .logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.menu {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.menu li a {
+    color: #fff;
+    font-weight: 500;
+    padding: 8px 12px;
+    transition: 0.3s;
+}
+
+.menu li a:hover {
+    background: #79003a;
+    border-radius: 5px;
+}
+
+/* ===========================
+   HERO
+=========================== */
+.hero {
+    background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('hero-bg.jpg') center/cover no-repeat;
+    color: #fff;
+    padding: 120px 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.hero h2 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #a30052; /* mesma cor do header */
+    text-shadow: 0 0 10px #fff;
+    text-align: center;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    max-width: 700px;
+    text-align: center;
+}
+
+.hero-btns {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.btn, .btn-sos {
+    padding: 12px 30px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    color: #fff;
+    transition: 0.3s;
+    text-align: center;
+}
+
+.btn {
+    background: #79003a;
+}
+
+.btn:hover {
+    background: #a30052;
+    transform: scale(1.05);
+}
+
+.btn-sos {
+    background: #d4006d;
+}
+
+.btn-sos:hover {
+    background: #a30052;
+    transform: scale(1.05);
+}
+
+/* ===========================
+   SEÇÕES
+=========================== */
+section {
+    padding: 80px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.titulo-central {
+    text-align: center;
+    font-size: 2.4rem;
+    margin-bottom: 25px;
+    color: #a30052;
+    font-weight: 700;
+}
+
+/* ===========================
+   VOZES SILENCIADAS
+=========================== */
+.vozes {
+    background: #fff;
+    border-radius: 12px;
+    padding: 50px 20px;
+    margin: 40px auto;
+    max-width: 900px;
+    text-align: center;
+    box-shadow: 0 6px 20px #0002;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.vozes-texto {
+    font-size: 1.15rem;
+    line-height: 1.7;
+    color: #444;
+}
+
+.vozes-btn {
+    padding: 14px 35px;
+    background: #a30052;
+    color: #fff;
+    font-size: 1.2rem;
+    border-radius: 8px;
+    transition: 0.3s ease;
+    align-self: center;
+}
+
+.vozes-btn:hover {
+    background: #79003a;
+    transform: scale(1.07);
+}
+
+/* ===========================
+   CARDS DE DADOS
+=========================== */
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 30px;
+    text-align: center;
+    flex: 1 1 220px;
+    max-width: 250px;
+    box-shadow: 0 4px 18px #0002;
+    transition: transform 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+}
+
+.card h3 {
+    font-size: 2.4rem;
+    color: #a30052;
+}
+
+/* ===========================
+   GRÁFICOS
+=========================== */
+.grafico-container {
+    max-width: 800px;
+    margin: 30px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.grafico-container canvas {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 6px 18px #0002;
+    max-width: 100%;
+}
+
+/* ===========================
+   MAPA
+=========================== */
+.mapa-img {
+    display: block;
+    margin: 20px auto;
+    max-width: 80%;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px #0002;
+}
+
+/* ===========================
+   QUIZ
+=========================== */
+.quiz-box {
+    text-align: center;
+    max-width: 700px;
+    margin-top: 20px;
+    background: #fff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px #0002;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.quiz-btn {
+    padding: 12px 25px;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    background: #a30052;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.3s;
+    align-self: center;
+}
+
+.quiz-btn:hover {
+    background: #79003a;
+    transform: scale(1.05);
+}
+
+/* ===========================
+   BOTÃO VOLTAR AO TOPO
+=========================== */
+.top-btn {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    padding: 12px 15px;
+    font-size: 1.3rem;
+    border-radius: 50%;
+    background: #a30052;
+    color: #fff;
+    cursor: pointer;
+    display: none;
+    z-index: 999;
+    transition: 0.3s;
+}
+
+.top-btn:hover {
+    background: #79003a;
+}
+
+/* ===========================
+   SOS PANEL
+=========================== */
+.sos-panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.3s;
+    z-index: 1000;
+}
+
+.sos-panel.ativo {
+    visibility: visible;
+    opacity: 1;
+}
+
+.sos-content {
+    background: #fff;
+    padding: 40px;
+    border-radius: 12px;
+    max-width: 500px;
+    text-align: center;
+    box-shadow: 0 6px 20px #0002;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.sos-option, .close-sos {
+    display: block;
+    padding: 12px;
+    margin: 5px auto;
+    background: #a30052;
+    color: #fff;
+    border-radius: 8px;
+    width: 70%;
+    max-width: 250px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.sos-option:hover, .close-sos:hover {
+    background: #79003a;
+}
+
+/* ===========================
+   ANIMAÇÃO AO SCROLL
+=========================== */
+.fade {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+}
+
+.fade.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ===========================
+   RESPONSIVO
+=========================== */
+@media(max-width: 768px){
+    .cards {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .hero h2 {
+        font-size: 2.2rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .menu {
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 100%;
+        display: none;
+        gap: 15px;
+        background: #a30052;
+        padding: 15px 0;
+    }
+
+    .menu.show {
+        display: flex;
+    }
+}

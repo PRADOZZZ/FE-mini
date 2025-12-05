@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Vozes Silenciadas — Interativo</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+* { margin:0; padding:0; box-sizing:border-box; font-family:"Poppins", sans-serif; }
+body { background:#fff7fa; }
+
+/* CORES */
+:root {
+    --rosa-queimado:#d16b86;
+    --rosa-pálido:#f8d7df;
+    --creme:#fff7fa;
+    --vinho-suave:#7a2e45;
+    --cinza-rosa:#c8a8b4;
+    --texto:#582533;
+    --branco:#fff;
+}
+
+/* NAVBAR */
+.navbar { width:100%; background:var(--rosa-queimado); padding:15px 50px; display:flex; justify-content:space-between; align-items:center; color:white; position:sticky; top:0; z-index:999; box-shadow:0 2px 10px #0003; }
+.navbar ul { display:flex; gap:25px; list-style:none; }
+.navbar a { text-decoration:none; color:white; font-weight:500; transition:0.2s; }
+.navbar a:hover { color: var(--creme); text-shadow:0 0 5px white; }
+
+/* HERO */
+.hero { display:flex; flex-direction:column; justify-content:center; align-items:center; height:80vh; text-align:center; padding:0 20px; }
+.hero h2 { font-size:3rem; color:var(--vinho-suave); line-height:1.4; margin-bottom:50px; }
+.hero .btn { margin:10px; padding:14px 28px; font-size:1.3rem; border-radius:10px; background:var(--vinho-suave); color:white; text-decoration:none; display:inline-block; transition:0.3s; }
+.hero .btn:hover { background:#5e1d33; transform:scale(1.05); }
+
+/* BOTÕES */
+.btn-quiz, .apoio-btn { cursor:pointer; transition:0.3s; border:none; }
+.btn-quiz { display:inline-block; padding:15px 40px; color:#fff; font-size:1.2rem; font-weight:600; text-transform:uppercase; background:#a30052; border-radius:8px; overflow:hidden; margin-top:20px; text-decoration:none; position:relative; }
+.btn-quiz:hover { background:#79003a; transform:scale(1.05); }
+
+.apoio-btn { padding:16px 40px; font-size:1.3rem; border-radius:10px; background:#d4006d; color:#fff; font-weight:700; margin-top:20px; }
+.apoio-btn:hover { background:#a30052; transform:scale(1.07); }
+
+/* SEÇÕES */
+section { padding:50px 20px; text-align:center; }
+.titulo-central { font-size:2.2rem; color:var(--vinho-suave); margin-bottom:30px; }
+section p { font-size:1.2rem; color:var(--texto); line-height:2; text-align:center; white-space:pre-line; margin-bottom:20px; }
+
+/* CARDS */
+.cards { display:flex; flex-wrap:wrap; justify-content:center; gap:20px; margin-top:30px; }
+.card { background:var(--rosa-pálido); padding:20px; border-radius:18px; border:2px solid var(--cinza-rosa); box-shadow:0 0 15px rgba(122,46,69,0.15); width:220px; transition:0.3s; position:relative; }
+.card:hover { transform:translateY(-6px); box-shadow:0 0 25px rgba(122,46,69,0.25); }
+.card h3 { color: var(--vinho-suave); margin-bottom:8px; font-size:1.6rem; }
+.card p { color: var(--texto); }
+
+/* QUIZ */
+.quiz-box { max-width:600px; margin:0 auto; background:var(--creme); border-radius:15px; padding:20px; box-shadow:0 0 20px rgba(0,0,0,0.1); }
+.quiz-box h3 { color:var(--vinho-suave); margin-bottom:20px; }
+.quiz-box #opcoes button { width:100%; padding:12px 20px; margin:10px 0; border:2px solid #a30052; border-radius:50px; background:#f8d7df; color:#a30052; font-weight:500; cursor:pointer; }
+.quiz-box #opcoes button:hover { background:#a30052; color:#fff; }
+
+/* BOTÃO MOTIVAÇÃO */
+.apoio-btn { font-weight:bold; }
+
+/* VOLTAR AO TOPO */
+.top-btn { position:fixed; bottom:25px; right:25px; background: var(--rosa-queimado); color:white; border:none; padding:14px 18px; border-radius:50%; font-size:22px; display:none; box-shadow:0 0 15px #0004; cursor:pointer; }
+
+/* SOS PANEL */
+.sos-panel { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); justify-content:center; align-items:center; z-index:1000; }
+.sos-content { background:white; padding:30px; border-radius:20px; max-width:400px; text-align:center; }
+.sos-content h2 { color:#a30052; margin-bottom:15px; }
+.sos-option { display:block; margin:10px 0; background:#a30052; color:white; padding:10px; border-radius:8px; text-decoration:none; }
+.close-sos { margin-top:15px; padding:10px 20px; border-radius:10px; background:#d4006d; color:white; cursor:pointer; border:none; }
+
+/* MENSAGEM CENTRAL QUIZ */
+#mensagem-quiz { display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background:#f8d7df; border:3px solid #a30052; color:#582533; font-weight:bold; font-size:1.3rem; padding:25px 35px; border-radius:15px; text-align:center; z-index:999; }
+
+/* GUIA RÁPIDO */
+#guia-msg { display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background:#fff0f5; border:3px solid #a30052; color:#582533; font-weight:bold; font-size:1.2rem; padding:30px 35px; border-radius:20px; text-align:center; z-index:1001; max-width:400px; }
+#fechar-guia { margin-top:15px; padding:10px 20px; border-radius:10px; background:#d4006d; color:white; cursor:pointer; border:none; }
+
+/* RESPONSIVO */
+@media(max-width:768px){ .cards { flex-direction:column; align-items:center; } .hero h2 { font-size:2.2rem; margin-bottom:30px; } }
+</style>
+</head>
+
+<body>
+
+<header class="topo">
+    <nav class="navbar">
+        <h1 class="logo">Vozes Silenciadas</h1>
+        <ul>
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#dados">Dados</a></li>
+            <li><a href="#graficos">Gráficos</a></li>
+            <li><a href="#quiz">Quiz</a></li>
+            <li><a href="relatos.html">Relatos</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section class="hero">
+    <h2>Por todas as vozes<br>que foram caladas</h2>
+    <a href="cassio.html" class="btn">Saiba mais</a>
+    <a href="#" id="sos-btn" class="btn"><i class="fa-solid fa-phone"></i> Precisa de ajuda?</a>
+</section>
+
+<div id="sos-panel" class="sos-panel">
+    <div class="sos-content">
+        <h2><i class="fa-solid fa-triangle-exclamation"></i> Está em perigo?</h2>
+        <p>Use uma das opções abaixo imediatamente:</p>
+        <a href="https://www.gov.br/mulheres/pt-br/ligue180" target="_blank" class="sos-option"><i class="fa-solid fa-phone"></i> Ligue 180</a>
+        <a href="#" class="sos-option" id="guia-btn">Guia rápido de proteção</a>
+        <button id="close-sos" class="close-sos">Fechar</button>
+    </div>
+</div>
+
+<section id="sobre">
+    <h2 class="titulo-central">Sobre o Projeto</h2>
+    <p>“Vozes Silenciadas” é uma plataforma interativa, que reúne dados, gráficos, relatos e informações. Cada elemento foi pensado para conscientizar e capacitar a sociedade na luta contra o feminicídio.</p>
+</section>
+
+<section id="dados">
+    <h2 class="titulo-central">Dados Impactantes</h2>
+    <div class="cards">
+        <div class="card"><h3 id="num1">0</h3><p>mulheres assassinadas por feminicídio por dia.</p></div>
+        <div class="card"><h3 id="num2">0%</h3><p>dos casos ocorrem dentro da própria casa.</p></div>
+        <div class="card"><h3 id="num3">0%</h3><p>já sofreram violência antes.</p></div>
+    </div>
+</section>
+
+<section id="graficos">
+    <h2 class="titulo-central">Gráficos Interativos</h2>
+    <div class="grafico-container">
+        <h3>Evolução anual do feminicídio</h3>
+        <canvas id="grafico1"></canvas>
+    </div>
+    <div class="grafico-container">
+        <h3>Faixa etária das vítimas</h3>
+        <canvas id="grafico2"></canvas>
+    </div>
+</section>
+
+<section id="quiz">
+    <h2 class="titulo-central">Teste seus conhecimentos</h2>
+    <div class="quiz-box" id="quiz-box">
+        <h3 id="pergunta"></h3>
+        <div id="opcoes"></div>
+    </div>
+</section>
+
+<section class="apoio">
+    <h2 class="titulo-central">Você não está sozinha</h2>
+    <p id="fraseApoio">Clique no botão para receber uma mensagem de força.</p>
+    <button id="motivarBtn" class="apoio-btn">Receber mensagem de força</button>
+</section>
+
+<button id="topBtn" class="top-btn"><i class="fa-solid fa-arrow-up"></i></button>
+
+<div id="mensagem-quiz"></div>
+<div id="guia-msg">
+    <p><b>Guia rápido de proteção:</b><br>
+    - Procure um local seguro.<br>
+    - Ligue imediatamente para 180 ou outro serviço de apoio.<br>
+    - Confie em amigos/família de confiança.<br>
+    - Salve provas de ameaças ou abusos.<br>
+    - Não hesite em denunciar.</p>
+    <button id="fechar-guia">Fechar</button>
+</div>
+
+<footer>
+    <p>© 2025 Vozes Silenciadas — Por Prado e Cassio</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+// FADE ANIMAÇÃO
+const fades=document.querySelectorAll(".fade");
+window.addEventListener("scroll",()=>{fades.forEach(el=>{if(el.getBoundingClientRect().top<window.innerHeight-100){el.style.opacity=1; el.style.transform="translateY(0px)";}});});
+
+// SOS PANEL
+const sosBtn=document.getElementById("sos-btn");
+const sosPanel=document.getElementById("sos-panel");
+const closeSos=document.getElementById("close-sos");
+sosBtn.addEventListener("click",()=>sosPanel.style.display="flex");
+closeSos.addEventListener("click",()=>sosPanel.style.display="none");
+
+// GUIA RÁPIDO
+const guiaBtn=document.getElementById("guia-btn");
+const guiaMsg=document.getElementById("guia-msg");
+const fecharGuia=document.getElementById("fechar-guia");
+guiaBtn.addEventListener("click",()=>{guiaMsg.style.display="block";});
+fecharGuia.addEventListener("click",()=>{guiaMsg.style.display="none";});
+
+// VOLTAR AO TOPO
+const topBtn=document.getElementById("topBtn");
+window.addEventListener("scroll",()=>topBtn.style.display=window.scrollY>300?"block":"none");
+topBtn.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));
+
+// MENSAGENS MOTIVACIONAIS
+const motivarBtn=document.getElementById("motivarBtn");
+const fraseApoio=document.getElementById("fraseApoio");
+const frases=["<b>Você é mais forte do que imagina.</b>","<b>Sua vida importa. Você não está sozinha.</b>","<b>Existe saída. Existe esperança.</b>","<b>Você merece segurança, amor e respeito.</b>","<b>Pedir ajuda é um ato de coragem.</b>","<b>Acredite no seu valor e na sua força.</b>","<b>Cada passo em direção à segurança é um ato de coragem.</b>","<b>Não tenha medo de se proteger e pedir apoio.</b>"];
+motivarBtn.addEventListener("click",()=>{fraseApoio.innerHTML=frases[Math.floor(Math.random()*frases.length)];});
+
+// CONTADORES
+function animarContador(id, final, duracao){
+    const elemento=document.getElementById(id);
+    let inicio=0;
+    const passo=final/(duracao/20);
+    const intervalo=setInterval(()=>{inicio+=passo;if(inicio>=final){inicio=final;clearInterval(intervalo);}elemento.textContent=Math.floor(inicio);},20);
+}
+window.onload=()=>{
+    animarContador("num1",7,2000);
+    animarContador("num2",65,2000);
+    animarContador("num3",80,2000);
+};
+
+// GRÁFICOS
+new Chart(document.getElementById("grafico1"), {type:"line", data:{labels:["2018","2019","2020","2021","2022","2023"], datasets:[{label:"Casos no ano", data:[1200,1390,1530,1600,1700,1880], borderColor:"#a30052", fill:false, tension:0.4}]}});
+
+new Chart(document.getElementById("grafico2"), {type:"bar", data:{labels:["Menores de 18","18-30","31-50","Acima de 50"], datasets:[{label:"Vítimas", data:[200,900,1100,300], backgroundColor:["#ff5a9c","#ff80b3","#d94f88","#b30052"]}]}});
+
+// QUIZ AUTOMÁTICO
+const perguntas=[
+    {q:"O que é feminicídio?", o:["Assassinato de homem","Assassinato de mulher pelo gênero","Briga de rua","Assalto"], a:1},
+    {q:"Qual a frequência aproximada de feminicídios no Brasil?", o:["Uma mulher a cada 2h","Uma mulher por semana","Uma mulher por dia","Uma mulher por mês"], a:0},
+    {q:"A violência doméstica pode preceder o feminicídio?", o:["Sim","Não"], a:0},
+    {q:"Qual órgão pode ser acionado em caso de violência doméstica?", o:["SAMU","Polícia","Corpo de Bombeiros","Receita Federal"], a:1},
+    {q:"Disque 180 serve para:", o:["Denunciar violência contra mulher","Informações sobre impostos","Emergência médica","Assistência social"], a:0},
+    {q:"Um comportamento abusivo pode ser:", o:["Só físico","Físico e psicológico","Nunca grave","Sempre óbvio"], a:1}
+];
+let indice=0;
+const perguntaEl=document.getElementById("pergunta");
+const opcoesEl=document.getElementById("opcoes");
+const mensagemQuiz=document.getElementById("mensagem-quiz");
+
+function mostrarPergunta(){
+    perguntaEl.textContent=perguntas[indice].q;
+    opcoesEl.innerHTML="";
+    perguntas[indice].o.forEach((op,i)=>{
+        const btn=document.createElement("button");
+        btn.textContent=op;
+        btn.classList.add("opcao-btn");
+        btn.addEventListener("click",()=>{
+            if(i===perguntas[indice].a){
+                mostrarMensagem("Correto! 🌸 Continue aprendendo!", true);
+            } else {
+                mostrarMensagem("Errado! ❌ Reflita sobre a importância da proteção.", false);
+            }
+            indice = (indice + 1) % perguntas.length;
+            setTimeout(mostrarPergunta, 1500);
+        });
+        opcoesEl.appendChild(btn);
+    });
+}
+
+function mostrarMensagem(texto, correto){
+    mensagemQuiz.textContent = texto;
+    mensagemQuiz.style.background = correto ? "#d4edda" : "#f8d7df";
+    mensagemQuiz.style.color = correto ? "#155724" : "#582533";
+    mensagemQuiz.style.display = "block";
+    setTimeout(()=>{mensagemQuiz.style.display="none";}, 1500);
+}
+
+mostrarPergunta();
+</script>
+
+</body>
+</html>

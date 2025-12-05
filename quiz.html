@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vozes Silenciadas — Quiz</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+    /* ===== RESET ===== */
+    * {margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif;}
+    body {background: linear-gradient(135deg,#f8d7df,#fff7fa); display:flex; flex-direction:column; align-items:center; min-height:100vh; padding:50px 20px; color:#582533;}
+
+    h1 {color:#a30052; margin-bottom:40px; text-align:center;}
+
+    /* ===== BOTÃO ANIMADO ESTILO BRASILCODE ===== */
+    .quiz-btn {
+        position: relative;
+        display: inline-block;
+        padding: 15px 40px;
+        color: #fff;
+        font-size: 1.2rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border-radius: 50px;
+        background: #a30052;
+        overflow: hidden;
+        transition: 0.3s;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+    .quiz-btn::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: #d4006d;
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform 0.3s ease-out;
+        z-index: 0;
+    }
+
+    .quiz-btn:hover::before {
+        transform: scaleX(1);
+        transform-origin: left;
+    }
+
+    .quiz-btn span {
+        position: relative;
+        z-index: 1;
+    }
+
+    /* ===== QUIZ BOX ===== */
+    .quiz-box {
+        background: #fff;
+        border-radius: 20px;
+        padding: 40px 30px;
+        box-shadow: 0 6px 25px rgba(0,0,0,0.15);
+        max-width: 600px;
+        width: 100%;
+        text-align: center;
+        margin-top: 30px;
+        display: none;
+    }
+
+    #quizQuestion {font-size: 1.4rem; margin-bottom: 25px; color:#a30052;}
+
+    .quiz-option {
+        display: block;
+        width: 100%;
+        padding: 12px 20px;
+        margin: 10px 0;
+        border: 2px solid #a30052;
+        border-radius: 50px;
+        background: #f8d7df;
+        color: #a30052;
+        font-weight: 500;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .quiz-option:hover {
+        background: #a30052;
+        color: #fff;
+        transform: scale(1.03);
+    }
+
+    .quiz-final {font-size: 1.3rem; color:#7a2e45;}
+
+    @media(max-width:500px){
+        .quiz-box {padding:30px 20px;}
+        #quizQuestion {font-size:1.2rem;}
+        .quiz-option {font-size:0.95rem; padding:10px 15px;}
+    }
+</style>
+</head>
+<body>
+
+<h1>Quiz Interativo — Feminicídio</h1>
+
+<!-- BOTÃO ANIMADO -->
+<a href="#" id="startQuizBtn" class="quiz-btn"><span>Iniciar Quiz</span></a>
+
+<!-- QUIZ BOX -->
+<div id="quizBox" class="quiz-box">
+    <p id="quizQuestion"></p>
+    <div id="quizAnswers"></div>
+</div>
+
+<script>
+    const startQuizBtn = document.getElementById('startQuizBtn');
+    const quizBox = document.getElementById('quizBox');
+    const quizQuestion = document.getElementById('quizQuestion');
+    const quizAnswers = document.getElementById('quizAnswers');
+
+    let currentIndex = 0;
+
+    const perguntas = [
+        {q:"O que é feminicídio?", alternativas:["Crime contra mulheres por serem mulheres.","Crime aleatório.","Roubo seguido de morte."], correta:0},
+        {q:"Qual número ligar em caso de violência doméstica?", alternativas:["150","180","100"], correta:1},
+        {q:"Qual tipo representa a maioria dos casos?", alternativas:["Violência doméstica","Assalto","Acidente"], correta:0},
+        {q:"Onde ocorrem a maioria dos feminicídios?", alternativas:["Na rua","No trabalho","Em casa"], correta:2},
+        {q:"O que fazer ao presenciar violência contra a mulher?", alternativas:["Ignorar","Denunciar","Participar"], correta:1},
+        {q:"Feminicídio é considerado:", alternativas:["Crime de ódio de gênero","Acidente doméstico","Infração leve"], correta:0},
+        {q:"Qual a principal forma de prevenção?", alternativas:["Educação e conscientização","Evitar ruas à noite","Mudança de endereço"], correta:0},
+        {q:"Quem pode denunciar casos de violência?", alternativas:["Somente a vítima","Qualquer pessoa","A polícia apenas"], correta:1},
+        {q:"A Lei Maria da Penha protege:", alternativas:["Todos os cidadãos","Mulheres em situação de violência doméstica","Apenas crianças"], correta:1},
+        {q:"O feminicídio é registrado oficialmente no Brasil desde:", alternativas:["2010","2015","2006"], correta:0}
+    ];
+
+    startQuizBtn.addEventListener('click', (e)=>{
+        e.preventDefault();
+        startQuizBtn.style.display='none';
+        quizBox.style.display='block';
+        mostrarPergunta();
+    });
+
+    function mostrarPergunta(){
+        const atual = perguntas[currentIndex];
+        quizQuestion.textContent = atual.q;
+        quizAnswers.innerHTML='';
+
+        atual.alternativas.forEach((alt,i)=>{
+            const btn=document.createElement('button');
+            btn.textContent=alt;
+            btn.classList.add('quiz-option');
+
+            btn.onclick = () => {
+                if(i===atual.correta){
+                    alert("✔ Resposta correta!");
+                }else{
+                    alert("✘ Resposta incorreta.");
+                }
+                currentIndex++;
+                if(currentIndex < perguntas.length){
+                    mostrarPergunta();
+                }else{
+                    quizBox.innerHTML='<p class="quiz-final"> Quiz finalizado! Obrigado por participar </p>';
+                }
+            }
+
+            quizAnswers.appendChild(btn);
+        });
+    }
+</script>
+
+</body>
+</html>
